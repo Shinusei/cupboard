@@ -1,9 +1,9 @@
 package com.cupboard.event;
 
 import com.cupboard.config.CupboardConfig;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.server.ServerStartedEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.event.server.ServerStartedEvent;
+import net.neoforged.neoforge.event.tick.ServerTickEvent;
 
 /**
  * Forge event bus handler, ingame events are fired here
@@ -11,12 +11,9 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 public class EventHandler
 {
     @SubscribeEvent
-    public static void onServerTick(TickEvent.ServerTickEvent event)
+    public static void onServerTick(ServerTickEvent.Post event)
     {
-        if (event.phase == TickEvent.Phase.END)
-        {
-            CupboardConfig.pollConfigs();
-        }
+        CupboardConfig.pollConfigs();
     }
 
     @SubscribeEvent

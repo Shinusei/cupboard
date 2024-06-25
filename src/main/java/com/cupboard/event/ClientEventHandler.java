@@ -3,17 +3,17 @@ package com.cupboard.event;
 import com.cupboard.config.CupboardConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.TitleScreen;
-import net.minecraftforge.client.event.ScreenEvent;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.neoforged.bus.api.EventPriority;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
+import net.neoforged.neoforge.client.event.ScreenEvent;
 
 public class ClientEventHandler
 {
     @SubscribeEvent
-    public static void onClientTick(TickEvent.ClientTickEvent event)
+    public static void onClientTick(ClientTickEvent.Post event)
     {
-        if (event.phase == TickEvent.Phase.END && !Minecraft.getInstance().hasSingleplayerServer())
+        if (!Minecraft.getInstance().hasSingleplayerServer())
         {
             CupboardConfig.pollConfigs();
         }
